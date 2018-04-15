@@ -81,18 +81,17 @@ class TopicsController extends Controller
 
     public function uploadImage(Request $request,ImageUploadHandler $uploader){
         $data = [
-            "success":false,
-            "msg":'上传失败',
-            "file_path":,
+            "success"=>false,
+            "msg"=>'上传失败',
+            "file_path"=>'',
         ];
-
         if($file = $request->upload_file){
-            $res = $uploader->save($file, 'topics', \Auth()::id(),1024);
+            $res = $uploader->save($file, 'topics', \Auth::id(),1024);
             if($res){
                 $data = [
-                    "success":true,
-                    "msg":'上传失败',
-                    "file_path":$res['path'],
+                    "success"=>true,
+                    "msg"=>'上传成功',
+                    "file_path"=>$res['path'],
                 ];
             }
 
