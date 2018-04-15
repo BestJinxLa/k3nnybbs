@@ -695,7 +695,7 @@
   margin: 15px 0;
   display: block;
   line-height: 18px;
-  background: #272822;
+  /*background: #272822;*/
   border-radius: 3px;
   font-size: 13px;
   font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;

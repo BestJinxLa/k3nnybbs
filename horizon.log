@@ -1,0 +1,10 @@
+Horizon started successfully.
+Horizon started successfully.
+[2018-04-15 22:40:47] Processing: App\Jobs\TranslateSlug
+[2018-04-15 22:40:47] Failed:     App\Jobs\TranslateSlug
+[2018-04-15 22:40:47] Processing: App\Jobs\TranslateSlug
+[2018-04-15 22:40:48] Processed:  App\Jobs\TranslateSlug
+[2018-04-15 22:49:15] Processing: App\Jobs\TranslateSlug
+[2018-04-15 22:49:15] Processed:  App\Jobs\TranslateSlug
+[2018-04-15 23:27:33] Processing: App\Jobs\TranslateSlug
+[2018-04-15 23:27:33] Processed:  App\Jobs\TranslateSlug
