@@ -8937,7 +8937,7 @@ body {
   overflow: initial;
   line-height: inherit;
   word-wrap: normal;
-  background-color: #272822;
+  background-color: transparent;
   border: 0;
 }
 
@@ -8957,3 +8957,4 @@ body {
   font-size: 28px;
   line-height: 38px;
 }
+
