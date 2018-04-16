@@ -43,7 +43,7 @@ Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit'
 // Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 
 
-
+/*话题*/
 
 // Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
@@ -56,8 +56,17 @@ Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show
 // http://larabbs.test/topics/119/slug-translation-test
 
 
-
+/*分类*/
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 
 Route::post('upload_image','TopicsController@uploadImage')->name('topics.upload_image');
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+
+
+/*回复*/
+
+//代码生成器为我们生成了完整的资源路由，不过我们只需要 store 和 destroy 的路由。因此我们需要修改 routes/web.php ，将以下：
+
+// Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
