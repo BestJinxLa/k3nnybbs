@@ -22,7 +22,7 @@ class TopicsController extends Controller
 	public function index(Request $request,Topic $topic)
 	{
 
-        $topics = $topic->withOrder($request->order)->paginate(15);
+        $topics = $topic->withOrder($request->order)->paginate(30);
 
         return view('topics.index', compact('topics'));
 	}
@@ -33,6 +33,7 @@ class TopicsController extends Controller
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);
         }
+        // return view('topics.show', compact('topic','replies'));
         return view('topics.show', compact('topic'));
     }
 

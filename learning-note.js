@@ -4,15 +4,15 @@
 
 〖============================================================================================================〗
 
- 【创建控制器】（主页）
+【创建控制器】（主页）
     $ php artisan make:controller PagesController
 
- 【登录注册】首先执行认证脚手架命令，生成代码：
+【登录注册】首先执行认证脚手架命令，生成代码：
     $ php artisan make:auth
     命令 make:auth 会询问我们是否要覆盖 app.blade.php，因为我们在前面章节中已经自定义了
     『主要布局文件』—— app.blade.php，所以此处输入 no
 
- 【新增表】
+【新增表】
 
    ① 新建模型
     $ php artisan make:model Models/Category -m
@@ -24,17 +24,17 @@
     $ php artisan migrate
 
 
-  ·每当我们创建完数据模型后，都需要设置 Category 的 $fillable 属性（可修改字段）
+    每当我们创建完数据模型后，都需要设置 Category 的 $fillable 属性（可修改字段）
 
 
 
 
- 【初始化分类数据】
+【初始化分类数据】
 
     $ php artisan make:migration seed_categories_data（向数据库表内注入数据）
 
 
- 【修改表】
+【修改表】
     我们进行的是字段添加操作，因此在命名迁移文件时需要加上前缀，遵照如 add_column_to_table
     这样的命名规范，并在生成迁移文件的命令中设置 --table 选项，用于指定对应的数据库表。
     最终的生成命令如下：
@@ -49,7 +49,7 @@
     ③ 执行迁移
         $ php artisan migrate
 
- 【创建表单请求验证】
+【创建表单请求验证】
 
     表单请求验证（FormRequest） 是 Laravel 框架提供的用户表单数据验证方案，此方案相比手工调用 validator 来说，能处理更为复杂的验证逻辑，更加适用于大型程序。在本课程中，我们将统一使用 表单请求验证来处理表单验证逻辑。
 
@@ -57,15 +57,15 @@
 
     $ php artisan make:request UserRequest
 
- 【回滚数据库迁移】
+【回滚数据库迁移】
     $ php artisan migrate:rollback
 
- 【composer引入后设置其配置信息】
+【composer引入后设置其配置信息】
     先 composer install intervention/image
     $ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
 
 
- 【代码生成Model】
+【artisan 生成Model】
 
     代码生成器能让你通过执行一条 Artisan 命令，完成注册路由、新建模型、新建表单验证类、新建资源控制器以及所需视图文件等任务。
 
@@ -105,6 +105,9 @@
 
     $ php artisan make:scaffold Reply --schema="topic_id:integer:unsigned:default(0):index,user_id:integer:unsigned:default(0):index,content:text"
 
+    生成后先去对应的 xxxModel内添加对应的关联关系如：belongs / hasmany
+
+
 【回滚数据库迁移】
     $ php artisan migrate:refresh --seed
 
@@ -115,6 +118,7 @@
     $ php artisan make:job TranslateSlug
 
     该命令会在 app/Jobs 目录下生成一个新的类
+
 【启动队列】
     $ php artisan queue:listen
 
@@ -714,7 +718,7 @@ databases:
     $ yarn config set registry https://registry.npm.taobao.org
 
  ·使用 Yarn 安装依赖：
-    $ yarn install
+    $
 
  ·安装成功后，运行以下命令即可:
     $ npm run watch-poll
@@ -1772,11 +1776,21 @@ $ exit
     扩展阅读 —— IBM 文档库：跨站点脚本攻击深入解析
         https://www.ibm.com/developerworks/cn/rational/08/0325_segal/
 
+
+
 【Supervisor安装与配置】
     在本地分享就有啦。嘻嘻
 
 
 
+【laravel分页get传多条件】
+
+    {!! $replies->appends(Request::except('page'))->render() !!}
+
+    分页中 appends() 方法可以使 URI 中的请求参数得到继承。
+
+
+    实例：https://laravel-china.org/courses/laravel-intermediate-training-5.5/664/replies-list
 
 
 

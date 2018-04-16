@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
 
         // 生成数据集合
         $users = factory(User::class)
-                        ->times(1)
+                        ->times(10)
                         ->make()
                         ->each(function ($user, $index)
                             use ($faker, $avatars)
