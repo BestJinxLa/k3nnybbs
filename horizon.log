@@ -17,3 +17,145 @@ In AbstractConnection.php line 155:
 Horizon started successfully.
 Horizon started successfully.
 Horizon started successfully.
+[2018-04-17 22:07:42] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:07:42] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:07:42] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:07:44] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:07:47] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:07:51] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:12:37] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:12:37] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:12:37] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:12:40] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:12:42] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:12:43] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:14:55] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:14:55] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:14:55] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:15:31] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:15:35] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:15:37] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:21:20] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:20] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:21:20] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:22] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:24] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:26] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:21:29] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:31] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:36] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:21:37] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:24:15] Processing: App\Jobs\TranslateSlug
+[2018-04-17 22:24:16] Processed:  App\Jobs\TranslateSlug
+[2018-04-17 22:27:34] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:27:34] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:27:34] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:27:40] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:27:43] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:27:44] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:35:11] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:35:11] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:35:11] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:35:14] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:35:17] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:35:53] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:37:10] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:37:10] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:37:10] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:37:12] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:37:15] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:37:19] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:38:25] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:38:25] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:38:25] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:38:28] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:38:29] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:38:32] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:46:31] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:46:31] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:46:31] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:46:34] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:46:37] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:46:38] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:51:30] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:51:30] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:52:55] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:52:55] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:52:55] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:52:59] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:04] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:06] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:53:27] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:27] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:53:27] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:33] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:38] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:53:45] Failed:     App\Notifications\TopicReplied
+[2018-04-17 22:56:21] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:56:21] Processed:  App\Notifications\TopicReplied
+[2018-04-17 22:56:21] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:56:23] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:56:25] Processing: App\Notifications\TopicReplied
+[2018-04-17 22:56:26] Failed:     App\Notifications\TopicReplied
+[2018-04-17 23:15:52] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:15:52] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:15:52] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:15:54] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:15:57] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:16:02] Failed:     App\Notifications\TopicReplied
+[2018-04-17 23:16:49] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:16:49] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:16:49] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:16:51] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:16:53] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:16:54] Failed:     App\Notifications\TopicReplied
+[2018-04-17 23:35:29] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:35:29] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:35:29] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:35:35] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:35:37] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:35:40] Failed:     App\Notifications\TopicReplied
+[2018-04-17 23:36:04] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:06] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:10] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:12] Failed:     App\Notifications\TopicReplied
+[2018-04-17 23:36:33] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:36] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:38] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:36:44] Failed:     App\Notifications\TopicReplied
+Horizon started successfully.
+[2018-04-17 23:45:40] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:45:42] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:47:22] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:47:22] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:47:23] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:47:24] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:48:40] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:48:40] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:48:40] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:48:44] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:49:11] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:49:11] Processed:  App\Notifications\TopicReplied
+[2018-04-17 23:49:11] Processing: App\Notifications\TopicReplied
+[2018-04-17 23:49:14] Processed:  App\Notifications\TopicReplied
+[2018-04-18 00:14:04] Processing: App\Notifications\TopicReplied
+[2018-04-18 00:14:04] Processed:  App\Notifications\TopicReplied
+[2018-04-18 00:14:04] Processing: App\Notifications\TopicReplied
+[2018-04-18 00:14:05] Processed:  App\Notifications\TopicReplied
+
+In AbstractConnection.php line 155:
+                                             
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+
+In AbstractConnection.php line 155:
+                                             
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+Horizon started successfully.
+[2018-04-18 00:18:19] Processing: App\Notifications\TopicReplied
+[2018-04-18 00:18:20] Processed:  App\Notifications\TopicReplied
+[2018-04-18 00:18:19] Processing: App\Notifications\TopicReplied
+[2018-04-18 00:18:22] Processed:  App\Notifications\TopicReplied
