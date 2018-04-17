@@ -34,7 +34,7 @@
     $ php artisan make:migration seed_categories_data（向数据库表内注入数据）
 
 
-【修改表】
+【修改表】[新增字段]
     我们进行的是字段添加操作，因此在命名迁移文件时需要加上前缀，遵照如 add_column_to_table
     这样的命名规范，并在生成迁移文件的命令中设置 --table 选项，用于指定对应的数据库表。
     最终的生成命令如下：
@@ -656,8 +656,21 @@ databases:
             .
         }
 
+【引用方法重写】
 
+    use Notifiable {
+        notify as protected laravelNotify;
+    }
 
+    public function notify($instance)
+    {
+        // 如果要通知的人是当前用户，就不必通知了！
+        if ($this->id == Auth::id()) {
+            return;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
+    }
 
 
 
