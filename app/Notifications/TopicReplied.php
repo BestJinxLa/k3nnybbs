@@ -3,9 +3,6 @@
 namespace App\Notifications;
 
 
-// use Illuminate\Queue\SerializesModels;
-// use Illuminate\Queue\InteractsWithQueue;
-// use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,7 +25,6 @@ use App\Models\Reply;
 class TopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
-    // use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $reply;
 

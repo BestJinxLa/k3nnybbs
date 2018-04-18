@@ -159,3 +159,20 @@ Horizon started successfully.
 [2018-04-18 00:18:20] Processed:  App\Notifications\TopicReplied
 [2018-04-18 00:18:19] Processing: App\Notifications\TopicReplied
 [2018-04-18 00:18:22] Processed:  App\Notifications\TopicReplied
+
+In AbstractConnection.php line 155:
+                                             
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+
+In AbstractConnection.php line 155:
+                                             
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+Horizon started successfully.
+[2018-04-18 23:15:57] Processing: App\Notifications\TopicReplied
+[2018-04-18 23:15:57] Processed:  App\Notifications\TopicReplied
+[2018-04-18 23:15:57] Processing: App\Notifications\TopicReplied
+[2018-04-18 23:15:59] Processed:  App\Notifications\TopicReplied

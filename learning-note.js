@@ -878,7 +878,29 @@ databases:
         }
 
 
+【前端删除权限】
+        我们还需要对视图文件进行处理，只有当用户拥有删除回复权限时，才显示按钮。在 Blade 模板里我们可以使用 @can 语句来实现：
 
+        resources/views/topics/_reply_list.blade.php
+
+        .
+        .
+        .
+                            {{-- 回复删除按钮 --}}
+                            @can('destroy', $reply)
+                                <span class="meta pull-right">
+                                    <form action="{{ route('replies.destroy', $reply->id) }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-default btn-xs pull-left">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </form>
+                                </span>
+                            @endcan
+        .
+        .
+        .
 
 
 
@@ -962,9 +984,8 @@ class User extends Authenticatable
 
 
 
-
 【预加载】【N+1问题】
-为了读取 user 和 category，每次的循环都要查一下 users 和 categories 表，在本例子中我们查询了 30 条话题数据，那么最终我需要执行的查询语句就是 30 * 2 + 1 = 61 条语句。如果我第一次查询出来的是 N 条记录，那么最终需要执行的 SQL 语句就是 N+1 次
+    为了读取 user 和 category，每次的循环都要查一下 users 和 categories 表，在本例子中我们查询了 30 条话题数据，那么最终我需要执行的查询语句就是 30 * 2 + 1 = 61 条语句。如果我第一次查询出来的是 N 条记录，那么最终需要执行的 SQL 语句就是 N+1 次
 
         我们可以通过 Eloquent 提供的 预加载功能 来解决此问题（预加载之前需在对应Model内关联起来）：
 
@@ -1045,8 +1066,29 @@ class User extends Authenticatable
                 return str_limit($excerpt, $length);
             }
 
+    注意：在模型监听器中，数据库操作需要避免再次 Eloquent 事件，所以这里我们使用了 DB 类进行操作。
 
+    话题连带删除
+    在我们的业务逻辑中，回复是针对话题而存在的。当话题被删除的时候，数据库里的回复信息没有存在的价值，只会占用空间。所以接下来我们将监听话题删除成功的事件，在此事件发生时，我们会删除此话题下所有的回复：
 
+    app/Observers/TopicObserver.php
+
+    <?php
+    .
+    .
+    .
+    class TopicObserver
+    {
+        .
+        .
+        .
+
+        public function deleted(Topic $topic)
+        {
+            \DB::table('replies')->where('topic_id', $topic->id)->delete();
+        }
+    }
+    新增了 deleted() 方法来监控话题成功删除的事件。需要注意的是，在模型监听器中，数据库操作需要避免再次 Eloquent 事件，所以这里我们使用了 DB 类进行操作。
 
 
 
