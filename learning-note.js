@@ -472,6 +472,80 @@
         // 获取所有直接权限
         $user->getDirectPermissions()
 
+【用户切换工具】[sudo-su]
+
+    $ composer require "viacreative/sudo-su:~1.1"
+    2. 添加 Provider
+        app/Providers/AppServiceProvider.php
+
+        <?php
+        .
+        .
+        .
+        class AppServiceProvider extends ServiceProvider
+        {
+            .
+            .
+            .
+            public function register()
+            {
+                if (app()->isLocal()) {
+                    $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+                }
+            }
+        }
+    3. 发布资源文件
+        运行以下命令：
+
+            $ php artisan vendor:publish --provider="VIACreative\SudoSu\ServiceProvider"
+
+        会生成：
+
+            /public/sudo-su 前端 CSS 资源存放文件夹；
+            config/sudosu.php 配置信息文件；
+    4. 修改配置文件
+        config/sudosu.php
+
+            <?php
+
+            return [
+
+                // 允许使用的顶级域名
+                'allowed_tlds' => ['dev', 'local', 'test'],
+
+                // 用户模型
+                'user_model' => App\Models\User::class
+
+            ];
+        Sudosu 为了避免开发者在生产环境下误开启此功能，在配置选项 allowed_tlds 里做了域名后缀的限制，tld 为 Top Level Domain 的简写。此处因我们的项目域名为 larabbs.test，故将 test 域名后缀添加到 allowed_tlds 数组中。
+
+        5. 模板植入
+            在主要布局模板中的 Scripts 区块上写入模板调用代码：
+
+                resources/views/layouts/app.blade.php
+
+                .
+                .
+                .
+
+                    @if (app()->isLocal())
+                        @include('sudosu::user-selector')
+                    @endif
+
+                    <!-- Scripts -->
+                    <script src="{{ asset('js/app.js') }}"></script>
+                    @yield('scripts')
+
+                </body>
+                </html>
+        此刻刷新页面，即可看到右下角的用户账号切换按钮。
+
+
+
+
+
+
+
 
 
 
@@ -994,14 +1068,128 @@ databases:
         .
 
 
+【策略授权动作】[用户授权]
+
+    https://laravel-china.org/docs/laravel/5.5/authorization#policy-filters
+
+    通过用户模型
+        Laravel 应用内置的 User 模型包含 2 个有用的方法来授权动作：can 和 cant。can 方法需要指定授权的动作和相关的模型。例如，判定一个用户是否授权更新指定的 Post 模型：
+
+            if ($user->can('update', $post)) {
+                //
+            }
+        如果指定模型的 策略已被注册，can 方法会自动调用核实的策略方法并且返回 boolean 值。如果没有策略注册到这个模型，can 方法会尝试调用和动作名相匹配的基于闭包的 Gate。
+
+        不需要指定模型的动作
+
+        记住，一些动作，比如 create 并不需要指定模型实例。在这种情况下，可传递一个类名给 can 方法。当授权动作时，这个类名将被用来判断使用哪个策略：
+
+            use App\Post;
+
+            if ($user->can('create', Post::class)) {
+                // 执行相关策略中的「create」方法...
+            }
+
+    通过中间件
+
+        Laravel 包含一个可以在请求到达路由或控制器之前就进行动作授权的中间件。默认，Illuminate\Auth\Middleware\Authorize 中间件被指定到 App\Http\Kernel 类中 can 键上。我们用一个授权用户更新博客的例子来讲解 can 中间件的使用：
+
+            use App\Post;
+
+            Route::put('/post/{post}', function (Post $post) {
+                // 当前用户可以更新博客...
+            })->middleware('can:update,post');
+
+        在这个例子中，我们传递给 can 中间件 2 个参数。第一个是需要授权的动作的名称，第二个是我们希望传递给策略方法的路由参数。这里因为使用了 隐式模型绑定，一个 Post 会被传递给策略方法。如果用户不被授权访问指定的动作，这个中间件会生成带有 403 状态码的 HTTP 响应。
+
+        不需要指定模型的动作
+
+        同样的，一些动作，比如 create，并不需要指定模型实例。在这种情况下，可传递一个类名给中间件。当授权动作时，这个类名将被用来判断使用哪个策略：
+
+            Route::post('/post', function () {
+                // 当前用户可以创建博客...
+            })->middleware('can:create,App\Post');
+
+    通过控制器辅助函数
+
+        除了在 User 模型中提供辅助方法外，Laravel 也为所有继承了 App\Http\Controllers\Controller 基类的控制器提供了一个有用的 authorize 方法。和 can 方法类似，这个方法接收需要授权的动作和相关的模型作为参数。如果动作不被授权，authorize 方法会抛出 Illuminate\Auth\Access\AuthorizationException 异常，然后被 Laravel 默认的异常处理器转化为带有 403 状态码的 HTTP 响应：
+
+            <?php
+
+            namespace App\Http\Controllers;
+
+            use App\Post;
+            use Illuminate\Http\Request;
+            use App\Http\Controllers\Controller;
+
+            class PostController extends Controller
+            {
+                /**
+                 * 更新指定博客。
+                 *
+                 * @param  Request  $request
+                 * @param  Post  $post
+                 * @return Response
+                 */
+                public function update(Request $request, Post $post)
+                {
+                    $this->authorize('update', $post);
+
+                    // 当前用户可以更新博客...
+                }
+            }
+        不需要指定模型的动作
+
+            和之前讨论的一样，一些动作，比如 create，并不需要指定模型实例。在这种情况下，可传递一个类名给 authorize 方法。当授权动作时，这个类名将被用来判断使用哪个策略：
+
+            /**
+             * 新建博客
+             *
+             * @param  Request  $request
+             * @return Response
+             */
+            public function create(Request $request)
+            {
+                $this->authorize('create', Post::class);
+
+                // 当前用户可以新建博客...
+            }
 
 
 
+    通过 Blade 模板
+        当编写 Blade 模板时，你可能希望页面的指定部分只展示给允许授权访问指定动作的用户。 例如，你可能希望只展示更新表单给有权更新博客的用户。这种情况下，你可以直接使用 @can 和 @cannot 指令。
 
+        @can('update', $post)
+            <!-- 当前用户可以更新博客 -->
+        @elsecan('create', $post)
+            <!-- 当前用户可以新建博客 -->
+        @endcan
 
+        @cannot('update', $post)
+            <!-- 当前用户不可以更新博客 -->
+        @elsecannot('create', $post)
+            <!-- 当前用户不可以新建博客 -->
+        @endcannot
+        这些指令在编写 @if 和 @unless 时提供了方便的缩写。@can 和 @cannot 各自转化为如下声明：
 
+        @if (Auth::user()->can('update', $post))
+            <!-- 当前用户可以更新博客 -->
+        @endif
 
+        @unless (Auth::user()->can('update', $post))
+            <!-- 当前用户不可以更新博客 -->
+        @endunless
+        不需要指定模型的动作
+        和大部分其它的授权方法类似，当动作不需要模型实例时，你可以传递一个类名给 @can 和 @cannot 指令：
 
+        @can('create', App\Post::class)
+            <!-- 当前用户可以新建博客 -->
+        @endcan
+
+        @cannot('create', App\Post::class)
+            <!-- 当前用户不可以新建博客 -->
+        @endcannot
 
 
 
