@@ -360,26 +360,117 @@
     2.添加本地.env文件
     3.php artisan key:generate
 
+【权限管理扩展包】[Laravel-permission]
+
+    1.通过 Composer 安装：
+
+        $ composer require "spatie/laravel-permission:~2.7"
 
 
+    生成数据库迁移文件：
+
+        $ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+    数据表各自的作用：
+
+        roles —— 角色的模型表；
+        permissions —— 权限的模型表；
+        model_has_roles —— 模型与角色的关联表，用户拥有什么角色在此表中定义，一个用户能拥有多个角色；
+        role_has_permissions —— 角色拥有的权限关联表，如管理员拥有查看后台的权限都是在此表定义，一个角色能拥有多个权限；
+        model_has_permissions —— 模型与权限关联表，一个模型能拥有多个权限。
+        从最后一张表中可以看出，laravel-permission 允许用户跳过角色，直接拥有权限。不过在本项目中，为了方便管理，我们设定：
+
+        用户只能通过角色来获取到权限，用户不单独拥有权限。例如：用户 Summer 必须是『站长』角色，才能行使『用户管理』权限。
+
+    接下来继续使用以下命令应用数据迁移：
+
+        $ php artisan migrate
+
+    生成配置信息：
+
+        $ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
+
+    配置信息存放于 config/permission.php ，可以打开此文件瞧一瞧，目前我们不需要做任何修改。
+
+    2. 加载 HasRoles
+        我们还需在 User 中使用 laravel-permission 提供的 Trait —— HasRoles，此举能让我们获取到扩展包提供的所有权限和角色的操作方法。
+
+        app/Models/User.php
+
+        <?php
+        .
+        .
+        .
+        use Spatie\Permission\Traits\HasRoles;
+
+        class User extends Authenticatable
+        {
+            use HasRoles;
+            .
+            .
+            .
+        }
 
 
+    3. 初始化角色和权限
+        我们允许管理员维护社区的内容，所以管理员跟一般用户的区别是能否管理站点内容，我们将这个权限定义为 manage_contents，管理员和站长角色都拥有 manage_contents 权限。权限的命名规范我们统一只用 _ 分隔法。
+
+        我们的管理员都是线上招募过来的，我们不希望给予他们太多的责任，管理员可以管理内容，但是却不能管理用户，例如修改用户密码、删除用户等。站长却需要拥有这个权限，我们将此权限定义为 manage_users 。
+
+        后面我们还会开发『站点设置』功能，站长可以在后台管理站点相关的设置，如 SEO 设置、联系邮箱等。而这个权限我们希望站长独有，我们将此权限定义为 edit_settings。
+
+        与『话题分类』的初始化一样，我们将使用数据迁移来实现初始化角色权限相关的代码，遵照命名规范 seed_(数据库表名称)_data：
+
+            $ php artisan make:migration seed_roles_and_permissions_data
 
 
+    4. 简单用法
 
+        接下来讲解下 laravel-permission 的一些简单用法。
 
+        新建角色，只需要提供 name 字段即可：
 
+        use Spatie\Permission\Models\Role;
+        $role = Role::create(['name' => 'Founder']);
+        为角色添加权限：
 
+        use Spatie\Permission\Models\Permission;
 
+        Permission::create(['name' => 'manage_contents']);
+        $role->givePermissionTo('manage_contents');
+        赋予用户某个角色：
 
+        // 单个角色
+        $user->assignRole('Founder');
 
+        // 多个角色
+        $user->assignRole('writer', 'admin');
 
+        // 数组形式的多个角色
+        $user->assignRole(['writer', 'admin']);
+        我们可以使用以下方法来检查用户角色：
 
+        // 是否是站长
+        $user->hasRole('Founder');
 
+        // 是否拥有至少一个角色
+        $user->hasAnyRole(Role::all());
 
+        // 是否拥有所有角色
+        $user->hasAllRoles(Role::all());
+        检查权限：
 
+        // 检查用户是否有某个权限
+        $user->can('manage_contents');
 
+        // 检查角色是否拥有某个权限
+        $role->hasPermissionTo('manage_contents');
+        直接给用户添加权限：
 
+        // 为用户添加『直接权限』
+        $user->givePermissionTo('manage_contents');
+
+        // 获取所有直接权限
+        $user->getDirectPermissions()
 
 
 
